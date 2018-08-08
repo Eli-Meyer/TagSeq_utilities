@@ -139,6 +139,21 @@
    <code>bbduk.sh in=hrf.fastq ref=adaptors.fasta k=12 stats=stats.txt out=clean.fastq overwrite=t</code><br>
    to remove any reads in "input.fastq" having valid alignments (at least one 12-bp kmer match)
    to sequences in "adaptors.fasta", and write the output (sequences passing the filter) to "output.fastq".<br>
+    
+    <li><b>Remove PCR Duplicates</b></li>
+   <p>In this optional step, the user can choose to discard PCR duplicates based on the sequence of the insert and the sequence
+    of an internal barcode incorporated during FS-cDNA synthesis. To remove duplicates from a library having barcodes at positions 1-4 
+    and insert sequences beginning at position 9, the user would run:<br>
+    <code>RemovePCRDups.pl -i input.fastq -o output.fastq -s 1 -e 4 -j 9</code>
+   </p>
+    
+    <li><b>Trim tags</b></li>
+   <p>Finally, we remove the non-template bases introduced at the 5' end of each tag during library preparation.
+   The region removed begins at the 5' end by default (position 1), and extends to the end of the 5'-most occurence
+    of GGG (up to a maximum position defined by the user). This range is determined from the position of the GGG motif in 
+    RNA oligos used during library preparation. To trim a set of reads where the GGG motif is expected to occur in the first 8 bases:<br>
+   <code>TagTrimmer.pl -i input.fastq -b 1 -e 8 -o output.fastq</code><br>
+      </p>
    </ul>
    </div>
   </div>
