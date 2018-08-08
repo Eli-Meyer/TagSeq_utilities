@@ -72,7 +72,7 @@
    for sharing code, the git tool itself is not simple or intuitive. To learn about use of git, we recommend
    <a href="http://gitref.org/" title="Link to GitRef website">this resource</a>.<br>
    To download the above repositories onto your system, assuming <i>git</i> is available:<br>
-   <code>git clone git://github.com/Eli-Meyer/2bRAD_utilities.git<br></code>
+   <code>git clone git://github.com/Eli-Meyer/TagSeq_utilities.git<br></code>
    Make sure you have execute permission to these scripts, and that they are in your path ($PATH).<br>
    </p>
    <li><b>bbduk.sh</b></li>
@@ -108,27 +108,24 @@
    <b>&#9665 Trim and filter reads</b></span></a>
    <div class="list">
    <ul>
-   <li><b>Truncate</b></li>
-   <p>Since AlfI produces uniform 36-bp restriction fragments, we first truncate sequences to keep only
-   the inserts derived from these fragments. This can be accomplished by running:<br>
-   <code>TruncateFastq.pl -i input.fastq -s 1 -e 36 -o output.fastq</code><br>
-   to read "input.fastq", trim away the sequences after 36 bp, and write the output to a file called "output.fastq".<br>
-   To read instructions for any of the scripts described here, run the script with no arguments. e.g. :<br>
-   <code>TruncateFastq.pl</code><br>
-   </p>
-
-   <li><b>Quality Filter</b></li>
-   <p>Next, we exclude low quality reads that might introduce errors in genotyping. The choice of thresholds is
+    <li><b>Quality Filter</b></li>
+   <p>First, we exclude low quality reads likely to contain sequencing errors. The choice of thresholds is
    somewhat arbitrary and ultimately up to the user. For an example using reasonable default settings, run:<br>
-   <code>QualFilterFastq.pl -i input.fastq -m 20 -x 5 -o output.fastq</code><br>
-   to remove any reads from "input.fastq" having more than 5 bases with quality scores lower than 20, and write
+   <code>QualFilterFastq.pl -i input.fastq -m 20 -x 10 -o output.fastq</code><br>
+   to remove any reads from "input.fastq" having more than 10 bases with quality scores lower than 20, and write
    the output to a file named "output.fastq".<br>
    </p>
-   <li><b>Adaptor filter</b></li>
-   <p>
-   Finally, the most computationally intensive task. The artificial DNA sequences introduced during
-   library preparation may occupy unknown portions of the read (including the entire read). Removing
-   these is probably the most important task in read processing, and certainly the most
+    <li><b>Homopolymer repeat filter Filter</b></li>
+   <p>Some sequence datasets include lots of homopolymer repeats (long stretches of a single nucleotide, e.g. poly-A tails). 
+    Generally this is a challenge for transcriptome assembly, and to a lesser extent for gene expression analysis (RNA-Seq) and 
+    genome assembly, and not at all for SNP genotyping. To exclude all reads with homopolymer repeats more than 30 bases in length, 
+    we can run:<br>
+   <code>HRFilterFastq.pl -i input.fastq -n 30 -o output.fastq</code><br>
+   </p>
+    <li><b>Adaptor filter</b></li>
+   <p>Next, we discard reads containing sequences derived from adaptors used during library preparation. These
+    artificial DNA sequences introduced during library preparation may occupy unknown portions of the read 
+    (including the entire read). Removing these is probably the most important task in read processing, and certainly the most
    computationally intensive. To make the whole pipeline easier to run in parallel, we've recently
    switched from the old version (AdaptorFilterFastq.pl) to a newer kmer-based tool
    called <a href="http://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide"
@@ -139,7 +136,7 @@
 
    To run this tool on a set of reads called input.fastq, to eliminate any reads sharing at least
    one 12-mer with sequences in adaptors.fasta, we can run:<br>
-   <code>bbduk.sh in=hrf.fastq ref=adaptors.fasta k=12 stats=stats.txt out=clean.fastq</code><br>
+   <code>bbduk.sh in=hrf.fastq ref=adaptors.fasta k=12 stats=stats.txt out=clean.fastq overwrite=t</code><br>
    to remove any reads in "input.fastq" having valid alignments (at least one 12-bp kmer match)
    to sequences in "adaptors.fasta", and write the output (sequences passing the filter) to "output.fastq".<br>
    </ul>
