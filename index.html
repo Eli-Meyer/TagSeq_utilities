@@ -201,7 +201,7 @@
    <li><b>Combine counts files from all samples</b></li>
    <p>Finally, we combine the counts data from all samples into a single output file, with samples as columns and genes as rows.</p>
    To combine data from three specific samples, you could run:<br>
-    <code>CombineExpression.pl sample1/counts.tab sample2/counts.tab sample3/counts.tab > combined.tab</code>
+    <code>CombineExpression.pl sample1/counts.tab sample2/counts.tab sample3/counts.tab > combined.tab</code><br>
    To combine data from all samples contained in subdirectories of the working directory:<br>
    <code>CombineExpression.pl */counts.tab > combined.tab</code>
    <p>The combined file produced by this step is ready for statistical analysis in DESeq2, edgeR, or other R packages for 
