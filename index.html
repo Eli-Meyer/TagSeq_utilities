@@ -181,9 +181,27 @@
    <li><b>Filter alignments</b></li>
    The raw alignments may include weak and ambiguous alignments (i.e. cases where a single read matches equally well
    to two or more regions of the genome). To remove these:<br>
-   <code>SAMFilter.pl -i gmapper.sam -m 40 -o filtered.sam</code><br>
+   <code>SAMFilter.pl -i gmapper.sam -m 40 -o filtered.sam -c 1</code><br>
    In this example, we chose to exclude any alignments having fewer than 40 matching bp. Ambiguous matches are also eliminated 
-   by default. The alignments passing this filter are written to an output file called "filtered.sam".<br>
+   by default. The alignments passing this filter are written to an output file called "filtered.sam". The counts data (the number of reads
+     matching each gene) is reported in "counts.tab"<br>
+   </ul>
+<a href="#combine" class="hide" id="combine" style="text-decoration: none; color: black; margin-left: 2%; font-size:14pt">
+   <span title="Click to expand">
+   <b>&#9655 Combine expression data</b></span></a>
+  <a href="#top" class="show" id="top" style="text-decoration: none; color: blue; margin-left: 2%; font-size:14pt">
+   <span title="Click to collapse">
+   <b>&#9665 Combine expression data</b></span></a>
+   <div class="list">
+   <ul>
+   <li><b>Combine counts files from all samples</b></li>
+   <p>Finally, we combine the counts data from all samples into a single output file, with samples as columns and genes as rows.</p>
+   To combine data from three specific samples, you could run:<br>
+    <code>CombineExpression.pl sample1/counts.tab sample2/counts.tab sample3/counts.tab > combined.tab</code>
+   To combine data from all samples contained in subdirectories of the working directory:<br>
+   <code>CombineExpression.pl */counts.tab > combined.tab</code>
+   <p>The combined file produced by this step is ready for statistical analysis in DESeq2, edgeR, or other R packages for 
+    analysis of differential gene expression.<br></p>
    </ul>
    </div>
   </div>
