@@ -97,8 +97,7 @@
    </p>
    </ul>
    </div>
-  </div>
-
+  
   <div class="row"><br>
   <a href="#process" class="hide" id="process" style="text-decoration: none; color: black; margin-left: 2%; font-size:14pt">
    <span title="Click to expand">
@@ -115,7 +114,7 @@
    to remove any reads from "input.fastq" having more than 10 bases with quality scores lower than 20, and write
    the output to a file named "output.fastq".<br>
    </p>
-    <li><b>Homopolymer repeat filter Filter</b></li>
+    <li><b>Homopolymer repeat filter</b></li>
    <p>Some sequence datasets include lots of homopolymer repeats (long stretches of a single nucleotide, e.g. poly-A tails). 
     Generally this is a challenge for transcriptome assembly, and to a lesser extent for gene expression analysis (RNA-Seq) and 
     genome assembly, and not at all for SNP genotyping. To exclude all reads with homopolymer repeats more than 30 bases in length, 
@@ -155,7 +154,6 @@
    <code>TagTrimmer.pl -i input.fastq -b 1 -e 8 -o output.fastq</code><br>
       </p>
    </ul>
-   </div>
   </div>
 
     <div class="row"><br>
@@ -186,6 +184,8 @@
    by default. The alignments passing this filter are written to an output file called "filtered.sam". The counts data (the number of reads
      matching each gene) is reported in "counts.tab"<br>
    </ul>
+  </div>
+  
 <a href="#combine" class="hide" id="combine" style="text-decoration: none; color: black; margin-left: 2%; font-size:14pt">
    <span title="Click to expand">
    <b>&#9655 Combine expression data</b></span></a>
@@ -205,7 +205,6 @@
    </ul>
    </div>
   </div>
-
     
  <hr align="left" style="margin-left: 2%;">
   <p style="margin-left: 2%; font-size: 85%;">Last updated 14 July 2018, E. Meyer.</p>
