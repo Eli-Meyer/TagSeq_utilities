@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # written by E Meyer, eli.meyer@science.oregonstate.edu
 # distributed without any guarantees or restrictions
 
@@ -37,6 +37,8 @@ my $outfqfile = $opt_o;
 #my $inseqs = new Bio::SeqIO(-file=>$fastqfile, -format=>"fastq-illumina");
 my $inseqs = new Bio::SeqIO(-file=>$fastqfile, -format=>"fastq");
 
+print "Processing $fastqfile using $scriptname, with quality threshold of $lowq and maximum LQ of $minlq...\n";
+system("date");
 my %sh; my $scount = 0;
 while ($seq = $inseqs->next_seq) 
 	{
@@ -55,15 +57,13 @@ while ($seq = $inseqs->next_seq)
 	$gh{$qid}++;
 	}
 
-print "Output from ", $scriptname, "\n";
 print "Checked ", $scount, " reads.\n";
 print $toolow, " failed.\n";
 print $scount - $toolow, " passed.\n";
-print $toolow/$scount, " rejection rate.\n";
+$pred = int($toolow/$scount*1000+0.5)/10;
+print $pred, "% of reads removed by this filter.\n";
 
 print "Writing sequences to output...\n";
-#my $inseqs = new Bio::SeqIO(-file=>$fastqfile, -format=>"fastq-illumina");
-#my $outseqs = new Bio::SeqIO(-file=>">$outfqfile", -format=>"fastq-illumina");
 my $inseqs = new Bio::SeqIO(-file=>$fastqfile, -format=>"fastq");
 my $outseqs = new Bio::SeqIO(-file=>">$outfqfile", -format=>"fastq");
 $ocount = 0;

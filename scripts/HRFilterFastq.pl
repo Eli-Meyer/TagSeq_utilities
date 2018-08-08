@@ -13,7 +13,6 @@ Required arguments:
 	-n max_length	maximum length of homopolymer repeat allowed in output
 	-o output	a name for the output file of sequences passing this filter (FASTQ)
 USAGE
-if ($#ARGV != 0 || $ARGV[0] eq "-h") {print "\n", "-"x60, "\n", $scriptname, "\n", $usage, "-"x60, "\n\n"; exit;}
 
 # -- module and executable dependencies
 $mod1="Getopt::Std";
@@ -36,6 +35,8 @@ foreach $v (@vals)
 	}
 
 # loop through fastq file and print out only those passing filter
+print "Processing $seqfile with $scriptname ...\n";
+system("date");
 open (IN, $seqfile);
 open (OUT, ">$outfile");
 my $switch = 0;

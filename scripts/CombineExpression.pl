@@ -1,18 +1,16 @@
-#!/usr/bin/perl
-# written by E Meyer, eli.meyer@science.oregonstate.edu
+#!/usr/bin/env perl
+# written by E Meyer, elimeyer76@gmail.com
 # distributed without any guarantees or restrictions
 
 # -- check arguments and print usage statement
 $scriptname=$0; $scriptname =~ s/.+\///g;
 $usage = <<USAGE;
-Combines gene expression results from multiple samples, producing an output of gene
-counts (the number of reads mapping to each gene from each sample) suitable for
-statistical analysis of gene expression.
-
+Combines expression data (counts) produced by mapping multiple
+samples against the same set of reference sequences.
 Usage: $scriptname file_1 file_2 ... file_n > output_file
 Where:
-	files 1-n:	nucleotide frequencies (output from SAMBasecaller.pl) for each sample
-	output_file:	a name for the output; tab-delimited text
+	files 1-n:	Gene expression data (counts output from SAMFilter.pl) for each sample
+	output_file:	a name for the output; tab-delimited text with genes as rows and samples as columns
 USAGE
 if ($#ARGV < 1 || $ARGV[0] eq "-h") {print "\n", "-"x60, "\n", $scriptname, "\n", $usage, "-"x60, "\n\n"; exit;}
 
