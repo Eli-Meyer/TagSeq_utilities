@@ -9,7 +9,7 @@ Combines expression data (counts) produced by mapping multiple
 samples against the same set of reference sequences.
 Usage: $scriptname file_1 file_2 ... file_n > output_file
 Where:
-	files 1-n:	Gene expression data (counts output from SAMFilter.pl) for each sample
+	files 1-n:	Gene expression data (counts output from SAMFilterByGene.pl) for each sample
 	output_file:	a name for the output; tab-delimited text with genes as rows and samples as columns
 USAGE
 if ($#ARGV < 1 || $ARGV[0] eq "-h") {print "\n", "-"x60, "\n", $scriptname, "\n", $usage, "-"x60, "\n\n"; exit;}

@@ -8,8 +8,24 @@ Combines expression data (counts) produced by mapping multiple
 samples against the same set of reference sequences.
 Usage: CombineExpression.pl file_1 file_2 ... file_n > output_file
 Where:
-	files 1-n:	Gene expression data (counts output from SAMFilter.pl) for each sample
+	files 1-n:	Gene expression data (counts output from SAMFilterByGene.pl) for each sample
 	output_file:	a name for the output; tab-delimited text with genes as rows and samples as columns
+------------------------------------------------------------
+
+-------------------------
+CombineReps.pl
+-------------------------
+
+------------------------------------------------------------
+CombineReps.pl
+Combines counts data from RNASeq libraries prepared from the same biological
+sample (e.g. replicate libraries or sequencing runs).
+Usage: CombineReps.pl input_1 input_2 ... input_n > output
+Where:
+	input_1:	first counts file (tab delimited text; rows=genes, columns=samples)
+	...
+	input_n:	final counts file to be combined
+	output:		a name for the output file (same format as input)
 ------------------------------------------------------------
 
 -------------------------
